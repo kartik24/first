@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% load bootstrap3 %}
+
+{%block content%}
+
+<div class="container-fluid">
+ <!-- Breadcrumb -->
+    <div class="row">
+      <div>
+        <ol class="breadcrumb">
+          <li class="active">Pathlab Info</li>
+            <li><a href="{{back_url}}" title="back to previous page">Back</a></li>
+            <li class="text-danger">{{error_msg}}</li>
+        </ol>
+      </div>
+    </div>
+
+   <div class="row col-sm-12">
+        <!--div class="col-sm-9"-->
+                <div>
+                        {% if pagination.has_previous %}
+                        <a href="?page={{ pagination.previous_page_number }}" >previous</a>
+                        {% endif %}
+
+                        <b>Page {{ pagination.number }} of {{ pagination.paginator.num_pages }}.</b>
+
+                        {% if pagination.has_next %}
+                        <a href="?page={{ pagination.next_page_number }}" >next</a>
+                        {% endif %}
+                </div>
+                <table class="table table-bordered table-hover table-condensed">
+
+
+                        <thead>
+                                <tr>
+
+					<th>Pathlab Id</th>
+					<th>Password</th>
+					<th>Name</th>
+                    <th>Basic Contact Number</th>
+					<th>Alternate Contact Number</th>
+					<th>Home Pickup</th>
+					<th>Account Number</th>
+					<th>IFSC Code</th>
+					<th>Email ID</th>
+					<th>Country</th>
+
+
+                                 </tr>
+                        </thead>
+                        {%for lab in pagination%}
+                                <tr>
+					<td>{{lab.Path_Lab_Id}}</td>
+					<td>{{lab.Path_Lab_Password}}</td>
+					<td>{{lab.Path_Lab_Name}}</td>
+                    <td>{{lab.Basic_Contact_number}}</td>
+					<td>{{lab.Alternate_Contact_number}}</td>
+					<td>{{lab.Home_Pick_up}}</td>
+					<td>{{lab.Account_Number }}</td>
+					<td>{{lab.IFSC_Code}}</td>
+					<td>{{lab.Email_Id}}</td>
+                    <td>{{lab.Country}}</td>
+					<td><a href="/pathlabinfo?id={{lab.id}}">Edit</a>|<a href="/pathlabinfo?id={{lab.id}}&delete=1">Delete</a></td>
+                                </tr>
+                        {%endfor%}
+                </table>
+        <!--/div-->
+        <!--div class="col-sm-3">
+                <form class="form" role="form" action="/doctor" method="get">
+		<label>Filters</label>
+
+                <div class="form-group">
+                        <span>Select Doctor</span>
+                        <select name="doctor" class="input-sm" style="width:260px;">
+                                <option value="0" {%ifequal selected_docid 0%}selected=""{%endifequal%}>All</option>
+                                {%for doc in doctorlist%}
+                                  <option value="{{doc.id}}" {%ifequal doc.id selected_docid%}selected=""{%endifequal%}>{{doc.name}}</option>
+                                {%endfor%}
+                         </select>
+                 </div>
+                {% buttons %}
+                        <button type="submit" class="btn btn-primary"> Apply</button>
+                        <button type="reset" class="btn" onClick = "location.href='/doctor'">Reset</button>
+                {% endbuttons %}
+
+                </form>
+
+
+        </div-->
+   </div>
+</div>
+{%endblock%}
+
+
+</body>
+</html>
